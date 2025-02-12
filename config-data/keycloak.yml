@@ -1,0 +1,6 @@
+security:
+  oauth2:
+    resourceserver:
+      jwt:
+        issuer-uri: http://localhost:9090/realms/spring-boot-real-dev
+        jwk-set-uri: http://localhost:9090/realms/spring-boot-real-dev/protocol/openid-connect/certs

@@ -1,0 +1,5 @@
+jwt:
+  auth:
+    converter:
+      principle-attribute: preferred_username
+      resource-id: spring-client-api-rest-clinica

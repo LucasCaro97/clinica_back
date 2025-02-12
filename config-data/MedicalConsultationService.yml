@@ -1,17 +1,13 @@
-version: "@project.version@"
-
 spring:
   application:
-    name: MedicalConsultationService
-  jpa:
-    hibernate:
-      ddl: auto
-  datasource:
-    url: jdbc:mysql://${BD}
-    username: ${USER_BD}
-    password: ${PASSWORD_BD}
+    name: medical-consultation
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+  config:
+    import:
+      - optional:configserver:http://config-server:8888/database.yml
+      - optional:configserver:http://config-server:8888/keycloak.yml
+      - optional:configserver:http://config-server:8888/eureka-server.yml
+      - optional:configserver:http://config-server:8888/jwt-converter.yml
+
+server:
+  port: 8084
