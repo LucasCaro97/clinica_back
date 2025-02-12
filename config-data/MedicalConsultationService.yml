@@ -1,13 +1,37 @@
-spring:
-  application:
-    name: medical-consultation
-
-  config:
-    import:
-      - optional:configserver:http://config-server:8888/database.yml
-      - optional:configserver:http://config-server:8888/keycloak.yml
-      - optional:configserver:http://config-server:8888/eureka-server.yml
-      - optional:configserver:http://config-server:8888/jwt-converter.yml
+version: "@project.version@"
 
 server:
   port: 8084
+
+
+spring:
+  application:
+    name: MedicalConsultationService
+  jpa:
+    hibernate:
+      ddl: auto
+  datasource:
+    url: jdbc:mysql://${BD}
+    username: ${USER_BD}
+    password: ${PASSWORD_BD}
+
+  #Keycloak Config
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/spring-boot-real-dev
+          jwk-set-uri: http://localhost:9090/realms/spring-boot-real-dev/protocol/openid-connect/certs
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+
+jwt:
+  auth:
+    converter:
+      principle-attribute: preferred_username
+      resource-id: spring-client-api-rest-clinica
